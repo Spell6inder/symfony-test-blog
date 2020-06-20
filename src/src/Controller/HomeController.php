@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="")
+     * @Route("/", name="index")
      * @Template
      */
     public function index()

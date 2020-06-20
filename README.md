@@ -8,3 +8,9 @@ cd symfony-test-blog
 cd docker
 docker-compose up
 ```
+
+## For develop frontend
+
+```bash
+docker-compose run --rm -d nodejs npm run watch
+```
