@@ -31,6 +31,6 @@ RUN apt-get purge -y g++ \
 
 WORKDIR /var/www
 
-CMD composer install ; wait-for-it database:3306 -- bin/console doctrine:migrations:migrate -q ; php-fpm
+CMD composer install ; wait-for-it mysql:3306 -- php bin/console doctrine:migrations:migrate -n ; php-fpm
 
 EXPOSE 9000

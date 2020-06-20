@@ -1,0 +1,6 @@
+
+<ul class="list-inline">
+{% for item in browser_statistic %}
+    <li class="list-inline-item">{{ item.browser }}: {{ item.count }}</li>
+{% endfor %}
+</ul>

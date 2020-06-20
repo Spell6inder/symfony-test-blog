@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\BrowserStatistic;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Class HomeController
@@ -20,6 +21,16 @@ class HomeController extends AbstractController
     public function index()
     {
         return [
+        ];
+    }
+
+    /**
+     * @Template(template="home/_browser_statistic.html.twig")
+     */
+    public function browserStatistic()
+    {
+        return [
+            'browser_statistic' => $this->getDoctrine()->getRepository(BrowserStatistic::class)->calculatedData(),
         ];
     }
 }

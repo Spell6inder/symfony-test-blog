@@ -132,6 +132,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "sinergi/browser-detector": {
+        "version": "6.1.2"
+    },
     "symfony/asset": {
         "version": "v5.0.10"
     },
