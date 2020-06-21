@@ -25,4 +25,18 @@
             {{ include("blog_category/_blog_posts.html.twig") }}
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <output id="comments-widget" data-comments-widget-thread="{{ "blog_category." ~ blog_post.id }}"></output>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('comments-widget') }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('comments-widget') }}
 {% endblock %}

@@ -23,7 +23,8 @@
     <div class="row">
         <div class="col-4 offset-8">
             {% if blog_post.category.id %}
-                <a href="{{ path('blog_category_show', {"id": blog_post.category.id}) }}" class="btn btn-info">Back to category</a>
+                <a href="{{ path('blog_category_show', {"id": blog_post.category.id}) }}" class="btn btn-info">Back to
+                    category</a>
             {% else %}
                 <a href="{{ path('blog_post_index') }}" class="btn btn-info">Back to list</a>
             {% endif %}
@@ -31,4 +32,18 @@
             {{ include('blog_post/_delete_form.html.twig') }}
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <output id="comments-widget" data-comments-widget-thread="{{ "blog_post." ~ blog_post.id }}"></output>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('comments-widget') }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('comments-widget') }}
 {% endblock %}

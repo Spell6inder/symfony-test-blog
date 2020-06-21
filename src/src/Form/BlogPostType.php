@@ -30,7 +30,7 @@ class BlogPostType extends AbstractType
                         //    'image/*',
                         //],
                         //'mimeTypesMessage' => 'Please upload a valid image document',
-                    ])
+                    ]),
                 ],
             ])
             ->add('category', EntityType::class, [
