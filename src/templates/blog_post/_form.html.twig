@@ -1,0 +1,16 @@
+{{ form_start(form, {'attr': {'id': 'blog_post-form'}}) }}
+    {{ form_widget(form) }}
+{{ form_end(form) }}
+<div class="row">
+    <div class="col-4 offset-8">
+        <button class="btn btn-success" form="blog_post-form">{{ button_label|default('Save') }}</button>
+        {% if blog_post.category.id %}
+            <a href="{{ path('blog_category_show', {"id": blog_post.category.id}) }}" class="btn btn-info">Back to category</a>
+        {% else %}
+            <a href="{{ path('blog_post_index') }}" class="btn btn-info">Back to list</a>
+        {% endif %}
+        {% if button_label is defined %}
+            {{ include('blog_post/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+</div>

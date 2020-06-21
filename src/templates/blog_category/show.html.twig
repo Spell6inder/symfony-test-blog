@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog category - {{ blog_category.name }} | Symfony test blog{% endblock %}
+
+{% block body %}
+    <h1>Blog category - {{ blog_category.name }}</h1>
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">{{ blog_category.id }}</dd>
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">{{ blog_category.name }}</dd>
+        <dt class="col-sm-3">Description</dt>
+        <dd class="col-sm-9">{{ blog_category.description }}</dd>
+    </dl>
+    <div class="row">
+        <div class="col-3 offset-9">
+            <a href="{{ path('blog_category_index') }}" class="btn btn-info">Back to list</a>
+            <a href="{{ path('blog_category_edit', {'id': blog_category.id}) }}" class="btn btn-warning">Edit</a>
+            {{ include('blog_category/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            {{ include("blog_category/_blog_posts.html.twig") }}
+        </div>
+    </div>
+{% endblock %}

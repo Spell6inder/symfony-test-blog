@@ -13,10 +13,20 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ path('index') }}">Symfony test blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-navbar" aria-controls="header-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="header-navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('blog_category_index') }}">Blog</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
-<main role="main" class="flex-shrink-0">
+<main role="main" class="flex-shrink-0 mb-3">
     <div class="container">
         {% block body %}{% endblock %}
     </div>
@@ -33,7 +43,6 @@
                 <span class="text-muted">Developed by Spell6inder</span>
             </div>
         </div>
-
     </div>
 </footer>
 {% block javascripts %}

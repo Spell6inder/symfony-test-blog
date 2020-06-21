@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit blog post | Symfony test blog{% endblock %}
+
+{% block body %}
+    <h1>Edit blog post</h1>
+    {{ include('blog_post/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}
