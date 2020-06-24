@@ -59,13 +59,19 @@
             thread: {
                 type: String,
                 default: null
+            },
+            csrf_token: {
+                type: String,
+                default: null
             }
         },
         data() {
             return {
                 errors: [],
                 comments: [],
-                newComment: {}
+                newComment: {
+                    "_token": this.csrf_token
+                }
             }
         },
         created() {
@@ -82,7 +88,9 @@
                 axios.put('/comment/' + this.thread, this.newComment)
                     .then((response) => {
                         this.loadComments();
-                        this.newComment = {};
+                        this.newComment.author = '';
+                        this.newComment.content = '';
+                        this.errors = [];
                     })
                     .catch((error) => {
                         this.errors = error.response.data.errors;

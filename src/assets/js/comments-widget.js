@@ -20,11 +20,15 @@ window.comments_widget = new Vue({
     },
     data: {
         thread: data_tag.dataset.commentsWidgetThread,
+        csrf_token: data_tag.dataset.commentsWidgetCsrf_token,
+        csrf_field: data_tag.dataset.commentsWidgetCsrf_field,
     },
     render: function (createElement) {
         return createElement(CommentsWidget, {
             props: {
-                thread: this.thread
+                thread: this.thread,
+                csrf_token: this.csrf_token,
+                csrf_field: this.csrf_field ? this.csrf_field : "_field"
             }
         });
     }

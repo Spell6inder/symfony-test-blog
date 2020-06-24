@@ -23,8 +23,6 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Comment::class,
-            // todo add csrf protection
-            'csrf_protection' => false,
         ]);
     }
 }

@@ -34,7 +34,10 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <output id="comments-widget" data-comments-widget-thread="{{ "blog_post." ~ blog_post.id }}"></output>
+            <output id="comments-widget"
+                    data-comments-widget-thread="{{ "blog_post." ~ blog_post.id }}"
+                    data-comments-widget-csrf_token="{{ csrf_token("comment") }}"
+            ></output>
         </div>
     </div>
 {% endblock %}
