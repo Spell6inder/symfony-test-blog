@@ -19,25 +19,21 @@ class BrowserStatisticsSubscriber implements EventSubscriberInterface
      * @var EntityManagerInterface
      */
     private $entityManager;
-    /**
-     * @var Browser
-     */
-    private $browserDetector;
 
-    public function __construct(SessionInterface $session, EntityManagerInterface $entityManager, Browser $browserDetector)
+    public function __construct(SessionInterface $session, EntityManagerInterface $entityManager)
     {
         $this->session = $session;
         $this->entityManager = $entityManager;
-        $this->browserDetector = $browserDetector;
     }
 
     public function onKernelRequest(RequestEvent $event, $eventName, $dispatcher)
     {
-        $browser = $this->browserDetector->getName();
-        if (!($browser == Browser::UNKNOWN || $this->browserDetector->isRobot() || $this->session->has(__CLASS__))) {
+        if (!$this->session->has(__CLASS__)) {
+            $browser = (new \DeviceDetector\DeviceDetector($event->getRequest()->headers->get('User-Agent')));
+            $browser->parse();
             $this->entityManager->persist(
                 (new BrowserStatistic())
-                ->setBrowser($browser)
+                ->setBrowser($browser->getClient('name'))
                 ->setIp($event->getRequest()->getClientIp())
                 ->setCreatedAt(new \DateTime())
             );

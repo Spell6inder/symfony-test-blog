@@ -12,5 +12,5 @@ docker-compose up
 ## For develop frontend
 
 ```bash
-docker-compose run --rm -d nodejs npm run watch
+docker-compose run --rm nodejs npm run watch
 ```

@@ -31,5 +31,3 @@ services:
     App\Service\FileUploader:
       arguments:
         $targetDirectory: '%blog_post_directory%'
-    Sinergi\BrowserDetector\:
-      resource: '../vendor/sinergi/browser-detector/src/'
