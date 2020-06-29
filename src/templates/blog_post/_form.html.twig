@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-4 offset-8">
         <button class="btn btn-success" form="blog_post-form">{{ button_label|default('Save') }}</button>
-        {% if blog_post.category.id %}
+        {% if blog_post.category %}
             <a href="{{ path('blog_category_show', {"id": blog_post.category.id}) }}" class="btn btn-info">Back to category</a>
         {% else %}
             <a href="{{ path('blog_post_index') }}" class="btn btn-info">Back to list</a>

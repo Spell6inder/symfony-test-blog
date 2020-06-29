@@ -20,6 +20,7 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^6.3",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/maker-bundle": "^1.14",
         "symfony/test-pack": "^1.0"
