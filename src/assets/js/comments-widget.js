@@ -12,24 +12,18 @@ Vue.use(Loading, {
     color: '#fc0000',
     backgroundColor: 'rgba(43, 51, 61, 0.5)'
 });
+
 const data_tag = document.getElementById('comments-widget');
 
-window.comments_widget = new Vue({
-    el: '#comments-widget',
-    components: {
-    },
-    data: {
-        thread: data_tag.dataset.commentsWidgetThread,
-        csrf_token: data_tag.dataset.commentsWidgetCsrf_token,
-        csrf_field: data_tag.dataset.commentsWidgetCsrf_field,
-    },
-    render: function (createElement) {
-        return createElement(CommentsWidget, {
+new Vue({
+    render: h => h(
+        CommentsWidget,
+        {
             props: {
-                thread: this.thread,
-                csrf_token: this.csrf_token,
-                csrf_field: this.csrf_field ? this.csrf_field : "_field"
+                thread: data_tag.dataset.commentsWidgetThread,
+                csrf_token: data_tag.dataset.commentsWidgetCsrf_token,
+                csrf_field: data_tag.dataset.commentsWidgetCsrf_field ? data_tag.dataset.commentsWidgetCsrf_field : "_field"
             }
-        });
-    }
-});
+        }
+    )
+}).$mount('#comments-widget');

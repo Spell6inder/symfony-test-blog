@@ -2,7 +2,8 @@
     <div>
         <ul v-if="comments" class="list-unstyled">
             <li class="media"
-                v-for="(comment, index) in comments"
+                v-for="(comment, commentIndex) in comments"
+                :key="commentIndex"
             >
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">
@@ -16,10 +17,10 @@
         <div v-else>
             No comments!
         </div>
-        <form v-on:submit.prevent="addComment">
+        <form @submit.prevent="addComment">
             <div class="alert alert-danger" role="alert" v-if="errors.length > 0">
                 <ul>
-                    <li v-for="error in errors">{{ error }}</li>
+                    <li v-for="(error, errorIndex) in errors" :key="errorIndex">{{ error }}</li>
                 </ul>
             </div>
             <div class="form-group">
@@ -53,16 +54,15 @@
     import axios from 'axios'
 
     export default {
-        name: "Order",
-        components: {},
+        name: "CommentsWidget",
         props: {
             thread: {
                 type: String,
-                default: null
+                default: ''
             },
             csrf_token: {
                 type: String,
-                default: null
+                default: ''
             }
         },
         data() {
@@ -74,32 +74,39 @@
                 }
             }
         },
-        created() {
+        mounted() {
             this.loadComments();
         },
         methods: {
-            loadComments: function () {
-                axios.get('/comment/' + this.thread)
-                    .then((response) => {
-                        this.comments = response.data
-                    })
+            async loadComments() {
+              const loader = this.$loading.show()
+              try {
+                const comments =  await axios.get('/comment/' + this.thread)
+                this.comments = comments.data
+              } catch (errors) {
+                this.errors = [errors.message];
+              } finally {
+                loader.hide()
+              }
             },
-            addComment: function () {
-                axios.put('/comment/' + this.thread, this.newComment)
-                    .then((response) => {
-                        this.loadComments();
-                        this.newComment.author = '';
-                        this.newComment.content = '';
-                        this.errors = [];
-                    })
-                    .catch((error) => {
-                        this.errors = error.response.data.errors;
-                    })
+            async addComment() {
+              const loader = this.$loading.show()
+              try {
+                await axios.put('/comment/' + this.thread, this.newComment);
+                this.loadComments();
+                this.newComment.author = '';
+                this.newComment.content = '';
+                this.errors = [];
+              } catch (errors) {
+                this.errors = errors.response.data.errors;
+              } finally {
+                loader.hide()
+              }
             }
         }
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
