@@ -18,9 +18,12 @@ RUN docker-php-ext-install zip intl pdo_mysql exif \
 RUN pecl install -o -f xdebug \
     && rm -rf /tmp/pear
 
+## Add the wait script to the image https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait
+COPY ./wait /usr/bin/wait
+RUN chmod +x /usr/bin/wait
+
+ENV COMPOSER_MEMORY_LIMIT -1
 COPY ./install-composer.sh /
-COPY ./wait-for-it.sh /usr/bin/wait-for-it
-RUN chmod +x /usr/bin/wait-for-it
 
 RUN apt-get purge -y g++ \
     && apt-get autoremove -y \
@@ -31,6 +34,6 @@ RUN apt-get purge -y g++ \
 
 WORKDIR /var/www
 
-CMD composer install ; wait-for-it mysql:3306 -- php bin/console doctrine:migrations:migrate -n ; php-fpm
+CMD composer install ; /usr/bin/wait && php bin/console doctrine:migrations:migrate -n ; php-fpm
 
 EXPOSE 9000
